@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 //文章に関する情報をもつJavaBeansモデル
 
-public class Board implements Serializable {
+public class Diary implements Serializable {
 	private String userName; //ユーザー名
 	private String text; //文章
 
-	public Board() {}
-	public Board(String userName, String text) {
+	public Diary() {}
+	public Diary(String userName, String text) {
 		this.userName = userName;
 		this.text = text;
 	}
