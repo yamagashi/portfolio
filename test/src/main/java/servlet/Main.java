@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Diary;
+import model.PostDiaryLogic;
 import model.User;
 
 
@@ -51,4 +52,37 @@ public class Main extends HttpServlet {
 		}
 	}
 
-}
+		@SuppressWarnings("unchecked")
+		protected void doPost(HttpServletRequest request,
+				HttpServletResponse response) throws ServletException, IOException {
+			//リクエストパラメータの取得
+			request.setCharacterEncoding("UTF-8");
+			String text = request.getParameter("text");
+
+			//入力値のチェック
+			if(text != null && text.length() != 0) {
+			//アプリケーションスコープに保存されたリストを取得
+				ServletContext application = this.getServletContext();
+				List<Diary> diaryList =
+						(List<Diary>) application.getAttribute("diaryList");
+
+			//セッションスコープに保存されたユーザー情報を取得
+			HttpSession session = request.getSession();
+			User loginUser = (User) session.getAttribute("loginUser");
+
+			//日記リストに追加
+			Diary diary = new Diary(loginUser.getName(),text);
+			PostDiaryLogic postDiaryLogic = new PostDiaryLogic();
+			postDiaryLogic.execute(diary, diaryList);
+
+			//アプリケーションスコープに保存
+			application.setAttribute("diaryList", diaryList);
+		}
+
+		//メイン画面にフォワード
+		RequestDispatcher dispatcher =
+				request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+		dispatcher.forward(request, response);
+
+       }
+	}
