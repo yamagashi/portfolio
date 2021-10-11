@@ -2,11 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.User,model.Diary,java.util.List" %>
 <%
+
 //セッションスコープに保存されたユーザー情報を取得
 User loginUser = (User) session.getAttribute("loginUser");
+
 //アプリケーションスコープに保存されたリストを取得
 List<Diary>diaryList =
   (List<Diary>) application.getAttribute("diaryList");
+
+//リクエストスコープに保存されたエラーメッセージを取得
+String errorMsg = (String) request.getAttribute("errorMsg");
 %>
 <!DOCTYPE html>
 <html>
