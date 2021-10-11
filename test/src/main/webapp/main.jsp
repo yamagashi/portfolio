@@ -31,6 +31,9 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 <input type="text" name="text">
 <input type="submit" value="つぶやく">
 </form>
+<% if(errorMsg != null) { %>
+<p><%= errorMsg %></p>
+<% } %>
 <% for(Diary diary : diaryList) { %>
 <p><%= diary.getUserName() %>:<%= diary.getText() %></p>
 <% } %>
