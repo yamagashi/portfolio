@@ -25,10 +25,12 @@ public class Main extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+
 		// 日記リストをアプリケーションスコープから取得
 		ServletContext application = this.getServletContext();
 		List<Diary> diaryList =
 				(List<Diary>) application.getAttribute("diaryList");
+
 		//取得出来なかった場合は、日記リストを新規作成し
 		//アプリケーションスコープに保存
 		if(diaryList == null) {
@@ -77,6 +79,11 @@ public class Main extends HttpServlet {
 
 			//アプリケーションスコープに保存
 			application.setAttribute("diaryList", diaryList);
+
+			} else {
+				//エラーメッセージをリクエストスコープに保存
+				request.setAttribute("errorMsg","日記が投稿されていません");
+
 		}
 
 		//メイン画面にフォワード
@@ -85,4 +92,4 @@ public class Main extends HttpServlet {
 		dispatcher.forward(request, response);
 
        }
-	}
+    }
