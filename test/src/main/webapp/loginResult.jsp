@@ -12,7 +12,7 @@ User loginUser = (User) session.getAttribute("loginUser");
 <title>つぶやき日記</title>
 </head>
 <body>
-<h1>つぶやき日記</h1>
+<h1>日記にログイン</h1>
 <%if(loginUser !=null) { %>
    <p>ログインに成功しました</p>
    <p>ようこそ<%= loginUser.getName() %>さん</p>
