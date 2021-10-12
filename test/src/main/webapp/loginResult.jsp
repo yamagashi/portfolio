@@ -9,7 +9,7 @@ User loginUser = (User) session.getAttribute("loginUser");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>つぶやき日記</title>
+<title>日記</title>
 </head>
 <body>
 <h1>日記にログイン</h1>
