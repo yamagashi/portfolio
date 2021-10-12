@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>日記リスト</h1>
-<p>なんでも</p>
+<p>なんでもいいよ</p>
 <form action="/test/Login"method="post">
 ユーザー名:<input type="text" name="name"><br>
 パスワード:<input type="password" name="pass"><br>
