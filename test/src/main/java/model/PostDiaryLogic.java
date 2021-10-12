@@ -1,10 +1,11 @@
 package model;
 
-import java.util.List;
+import dao.DiaryDAO;
 
 public class PostDiaryLogic {
-	public void execute(Diary diary, List<Diary>diaryList) {
-		diaryList.add(0,diary);  //先頭に追加
+	public void execute(Diary diary) {
+		DiaryDAO dao = new DiaryDAO();
+		dao.create(diary);
 	}
 
 }
