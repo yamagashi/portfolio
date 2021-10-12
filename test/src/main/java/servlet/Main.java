@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Diary;
+import model.GetDiaryListLogic;
 import model.PostDiaryLogic;
 import model.User;
 
@@ -25,6 +26,10 @@ public class Main extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		//日記リストを取得して、リクエストスコープに保存
+		GetDiaryListLogic getDiaryListLogic = new GetDiaryListLogic();
+		List<Diary> DiaryList = getDiaryListLogic.execute();
+		request.setAttribute("diaryList", DiaryList);
 
 		// 日記リストをアプリケーションスコープから取得
 		ServletContext application = this.getServletContext();
@@ -73,18 +78,20 @@ public class Main extends HttpServlet {
 			User loginUser = (User) session.getAttribute("loginUser");
 
 			//日記リストに追加
-			Diary diary = new Diary(loginUser.getName(),text);
+			Diary diary = new Diary(0, loginUser.getName(),text);
 			PostDiaryLogic postDiaryLogic = new PostDiaryLogic();
-			postDiaryLogic.execute(diary, diaryList);
-
-			//アプリケーションスコープに保存
-			application.setAttribute("diaryList", diaryList);
+			postDiaryLogic.execute(diary);
 
 			} else {
 				//エラーメッセージをリクエストスコープに保存
 				request.setAttribute("errorMsg","日記が投稿されていません");
 
 		}
+
+		//日記リストを取得して、リクエストスコープに保存
+		GetDiaryListLogic getDiaryListLogic = new GetDiaryListLogic();
+		List<Diary> diaryList = getDiaryListLogic.execute();
+		request.setAttribute("diaryList", diaryList);
 
 		//メイン画面にフォワード
 		RequestDispatcher dispatcher =

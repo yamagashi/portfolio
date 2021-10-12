@@ -14,7 +14,7 @@ public class DiaryDAO {
 
 	//データベース接続に使用する情報
 	private final String JDBC_URL =
-			"jdbc:mariadb:tcp://localhost/~/test";
+			"jdbc:mysql:tcp://localhost/~/test";
 	private final String DB_USER = "sa";
 	private final String DB_PASS = "";
 

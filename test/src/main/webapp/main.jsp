@@ -8,7 +8,7 @@ User loginUser = (User) session.getAttribute("loginUser");
 
 //アプリケーションスコープに保存されたリストを取得
 List<Diary>diaryList =
-  (List<Diary>) application.getAttribute("diaryList");
+  (List<Diary>) request.getAttribute("diaryList");
 
 //リクエストスコープに保存されたエラーメッセージを取得
 String errorMsg = (String) request.getAttribute("errorMsg");
@@ -17,10 +17,10 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>つぶやき日記</title>
+<title>日記</title>
 </head>
 <body>
-<h1>つぶやき日記メイン</h1>
+<h1>日記メイン</h1>
 <p>
 <%=loginUser.getName() %>さんログイン中
 <a href="/test/Logout">ログアウト</a>
